@@ -7,5 +7,9 @@ name = "cube_conundrum"
 version = "0.1.0"
 
 [[package]]
+name = "gear_ratios"
+version = "0.1.0"
+
+[[package]]
 name = "trebuchet"
 version = "0.1.0"
