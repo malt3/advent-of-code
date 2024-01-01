@@ -15,5 +15,9 @@ name = "scratchcards"
 version = "0.1.0"
 
 [[package]]
+name = "seedlocation"
+version = "0.1.0"
+
+[[package]]
 name = "trebuchet"
 version = "0.1.0"
