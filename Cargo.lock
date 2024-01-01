@@ -11,5 +11,9 @@ name = "gear_ratios"
 version = "0.1.0"
 
 [[package]]
+name = "scratchcards"
+version = "0.1.0"
+
+[[package]]
 name = "trebuchet"
 version = "0.1.0"
