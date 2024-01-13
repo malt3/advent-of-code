@@ -3,10 +3,9 @@ use std::io::{self, BufRead};
 
 #[derive(PartialEq, Eq, PartialOrd, Ord, Copy, Clone)]
 enum Card {
-    Ace = 14,
-    King = 13,
-    Queen = 12,
-    Jack = 11,
+    Ace = 13,
+    King = 12,
+    Queen = 11,
     Ten = 10,
     Nine = 9,
     Eight = 8,
@@ -16,6 +15,7 @@ enum Card {
     Four = 4,
     Three = 3,
     Two = 2,
+    Joker = 1,
 }
 
 #[derive(PartialEq, Eq, PartialOrd, Ord)]
@@ -47,26 +47,31 @@ impl Hand {
         cards.sort();
 
         let mut counts = [0; 15];
+        let mut joker_count = 0;
         for card in cards {
+            if *card == Card::Joker {
+                joker_count += 1;
+                continue;
+            }
             counts[*card as usize] += 1;
         }
         let mut counts = counts.to_vec();
         counts.sort();
         counts.reverse();
         let mut counts = counts.iter();
-        let highest_count = counts.next().unwrap();
+        let highest_count = counts.next().unwrap() + joker_count;
         let second_highest_count = counts.next().unwrap();
-        if *highest_count == 5 {
+        if highest_count == 5 {
             HandType::FiveOfAKind
-        } else if *highest_count == 4 {
+        } else if highest_count == 4 {
             HandType::FourOfAKind
-        } else if *highest_count == 3 && *second_highest_count == 2 {
+        } else if highest_count == 3 && *second_highest_count == 2 {
             HandType::FullHouse
-        } else if *highest_count == 3 {
+        } else if highest_count == 3 {
             HandType::ThreeOfAKind
-        } else if *highest_count == 2 && *second_highest_count == 2 {
+        } else if highest_count == 2 && *second_highest_count == 2 {
             HandType::TwoPairs
-        } else if *highest_count == 2 {
+        } else if highest_count == 2 {
             HandType::OnePair
         } else {
             HandType::HighCard
@@ -138,7 +143,7 @@ fn read_input(
                 'A' => Card::Ace,
                 'K' => Card::King,
                 'Q' => Card::Queen,
-                'J' => Card::Jack,
+                'J' => Card::Joker,
                 'T' => Card::Ten,
                 '9' => Card::Nine,
                 '8' => Card::Eight,

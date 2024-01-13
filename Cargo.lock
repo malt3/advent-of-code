@@ -3,6 +3,10 @@
 version = 3
 
 [[package]]
+name = "camelcards"
+version = "0.1.0"
+
+[[package]]
 name = "cube_conundrum"
 version = "0.1.0"
 
